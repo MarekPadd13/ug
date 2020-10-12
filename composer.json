@@ -27,7 +27,10 @@
         "zxbodya/yii2-gallery-manager": "*@dev",
         "himiklab/yii2-sortable-grid-view-widget": "*",
         "himiklab/yii2-gridview-ajaxed-widget" : "*",
-        "kartik-v/yii2-widget-datetimepicker": "*"
+        "kartik-v/yii2-widget-datetimepicker": "*",
+        "yii-dream-team/yii2-upload-behavior": "*",
+        "kartik-v/yii2-widget-fileinput": "dev-master",
+        "kartik-v/yii2-widget-datepicker": "dev-master"
 
     },
     "require-dev": {

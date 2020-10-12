@@ -53,9 +53,18 @@ class DictHouses extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'number_house' => 'Number House',
+            'name' => 'Номер дома',
             'deadline' => 'Deadline',
             'moderation' => 'Moderation',
         ];
+    }
+
+    public static function allColumn() {
+        return self::find()
+            ->select('name, id')
+            ->where(['moderation'=> self::ADD_MODERATION])
+            ->orderBy(['name'=> SORT_ASC])
+            ->indexBy('id')->column();
     }
 
     /**
