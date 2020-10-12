@@ -1,0 +1,24 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+</IfModule>
+
+<IfModule mod_rewrite.c>
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.
+RewriteRule (.*) https://jk-vidniy-gorod.ru/$1 [L,R=301]
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/.*
+    RewriteRule ^(.*)$ web/$1 [L]
+
+    RewriteCond %{REQUEST_URI} !^/web/
+    RewriteCond %{REQUEST_FILENAME} !-f [OR]
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^.*$ web/index.php
+</IfModule>
+
+Options +FollowSymLinks
+IndexIgnore */*
+RewriteEngine on
