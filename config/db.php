@@ -3,8 +3,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=cyetmozb_ug',
-    'username' => 'root',
-    'password' => 'root',
+    'username' => 'cyetmozb_ug',
+    'password' => 'Ay$!XiFrEH8y',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
