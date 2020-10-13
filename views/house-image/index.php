@@ -5,7 +5,7 @@ use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\StreamSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $data yii\data\ActiveDataProvider */
 
 $this->title = 'Фотографии домов';
 $this->params['breadcrumbs'][] = $this->title;
@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'beforeItem' => function($model , $key , $index , $widget) {
             return  $index%4 == 0 ? '<div class="row">':"";
         },
-        'afterItem' => function($model , $key , $index , $widget) {
-            return  $index%4 == 3 ? '</div>': "";
-        } ,
+        'afterItem' => function($model , $key , $index , $widget) use($data) {
+            return  $index%4 == 3  || ($data->getTotalCount() - 1) == $index ? '</div>': "";
+        },
         'itemView' => '_item',
     ]) ?>
 

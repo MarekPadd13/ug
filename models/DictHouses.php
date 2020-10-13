@@ -68,11 +68,23 @@ class DictHouses extends \yii\db\ActiveRecord
     }
 
     public function getImages() {
-        return $this->hasMany(HomeImage::class, ['home_id'=>'id'])->where(['status'=> HomeImage::STATUS_PUBLISHED])->orderBy(['date' => SORT_DESC]);
+        return $this->hasMany(HomeImage::class, ['home_id'=>'id'])->where(['status'=> HomeImage::STATUS_PUBLISHED]);
+    }
+
+    public function getAngleGroup() {
+        return $this->getImages()->select('angle_id')->groupBy('angle_id');
+    }
+
+    public function getImagesDateLast() {
+        return $this->getImages()->orderBy(['date' => SORT_DESC]);
     }
 
     public function getLastImage() {
-        return $this->getImages()->one();
+        return $this->getImagesDateLast()->one();
+    }
+
+    public function getAnglesImages($angleId) {
+        return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->all();
     }
 
     /**

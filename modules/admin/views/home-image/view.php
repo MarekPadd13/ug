@@ -43,6 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <?= Html::img($model->getImageFileUrl('image')); ?>
+    <?= Html::img($model->getImageFileUrl('image'), ['width'=>'100%']); ?>
 
 </div>

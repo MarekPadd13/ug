@@ -30,7 +30,7 @@ class HouseImageController extends Controller
     {
         $query = DictHouses::find()->innerJoin(HomeImage::tableName(), 'home_id=dict_houses.id')
             ->where(['moderation'=> DictHouses::ADD_MODERATION, 'status'=> HomeImage::STATUS_PUBLISHED])
-            ->orderBy(['created_at'=> SORT_DESC]);
+            ->distinct()->orderBy(['dict_houses.id'=>SORT_DESC]);
         $data = new ActiveDataProvider(['query' => $query, 'sort' => false]);
         return $this->render('index', [
             'data' => $data
@@ -38,12 +38,13 @@ class HouseImageController extends Controller
     }
     /**
      * @param integer $id
+     * @param integer $angle_id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
 
 
-    public function actionView($id)
+    public function actionView($id, $angle_id =null)
     {
         $model = $this->findModel($id);
         return $this->render('view', [
@@ -88,7 +89,7 @@ class HouseImageController extends Controller
             try {
                 $this->service->create($form);
                 Yii::$app->session->setFlash('success','Успешно добавлен. Ожидайте модерацию');
-                return $this->redirect(['view', 'home_id'=> $model->id]);
+                return $this->redirect(['view', 'id'=> $model->id]);
             }catch (\RuntimeException $e) {
                 Yii::$app->session->setFlash('danger', $e->getMessage());
             }
