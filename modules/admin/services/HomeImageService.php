@@ -10,18 +10,10 @@ class HomeImageService
 {
 
     public function create(HomeImageForm $form){
-        $db = \Yii::$app->db;
-        $transaction = $db->beginTransaction();
-
-        try {
-            $form->angle_id = $this->angleID($form) ?? $form->angle_id;
-            $model = HomeImage::create($form);
-            $this->save($model);
-            $transaction->commit();
-            return $model;
-        } catch (\Exception $e) {
-            $transaction->rollback();
-        }
+        $form->angle_id = $this->angleID($form) ?? $form->angle_id;
+        $model = HomeImage::create($form);
+        $this->save($model);
+        return $model;
 
     }
 

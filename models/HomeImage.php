@@ -2,13 +2,10 @@
 
 namespace app\models;
 
+use app\modules\admin\behaviors\ImageUploadBehaviorYiiPhp;
 use app\modules\admin\form\HomeImageForm;
-use modules\usecase\ImageUploadBehaviorYiiPhp;
-use phpbb\session;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\web\UploadedFile;
-use yiidreamteam\upload\ImageUploadBehavior;
 
 /**
  * This is the model class for table "home_images".
@@ -99,13 +96,18 @@ class  HomeImage extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::class,
             [
-                'class' => ImageUploadBehavior::class,
+                'class' => ImageUploadBehaviorYiiPhp::class,
                 'attribute' => 'image',
                 'filePath' => '@webroot/uploads/[[pk]].[[extension]]',
-                'fileUrl' => '/uploads/[[pk]].[[extension]]'
-            ]
+                'fileUrl' => '/uploads/[[pk]].[[extension]]',
+                'thumbPath' => '@webroot/uploads/cache/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '/uploads//cache/[[profile]]_[[pk]].[[extension]]',
+                'thumbs' => [
+                    'preview' => ['width' => 100, 'height' => 100],
+                ],
+            ],
+            TimestampBehavior::class,
         ];
     }
 
