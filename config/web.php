@@ -143,13 +143,16 @@ $config = [
         'slider' => [
             'class' => 'app\modules\slider\Module',
         ],
-    ],
 
+
+    ],
 
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
+            'photo/*',
             'site/*',
+            'house-image/*',
             'api/*',
             'slider/default/*',
         ]

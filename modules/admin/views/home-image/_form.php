@@ -39,8 +39,7 @@ use app\models\DictHouses;
     <div id="angle_new">
         <?= $form->field($model, 'name')->textInput() ?>
     </div>
-
-
+    <?php if(!Yii::$app->request->get('home_id')): ?>
     <?= $form->field($model, 'home_id')->widget(Select2::class, [
         'data' => DictHouses::allColumn(),
         'options' => ['placeholder' => 'Укажите номер дома'],
@@ -48,6 +47,7 @@ use app\models\DictHouses;
             'allowClear' => true
         ],
     ]) ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'link')->textInput() ?>
 
@@ -81,6 +81,7 @@ select.on("change init", function() {
     } else {
         angleNew.hide();
     }
+    if (this.value == "") {  angleNew.hide(); } 
 });
 select.trigger("init");
 JS

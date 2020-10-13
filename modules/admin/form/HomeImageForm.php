@@ -40,6 +40,7 @@ class HomeImageForm extends Model
     {
         return [
             [['link', 'date', 'home_id', 'angle_id'], 'required'],
+            [['link', 'angle_id'], 'trim'],
             [['name'], 'required', 'when' => function ($model) {
                return $model->angle_id == 0;
             },   'whenClient' => 'function (attribute, value) { return $("#homeimageform-angle_id").val() == 0}'],

@@ -30,7 +30,8 @@
         "kartik-v/yii2-widget-datetimepicker": "*",
         "yii-dream-team/yii2-upload-behavior": "*",
         "kartik-v/yii2-widget-fileinput": "dev-master",
-        "kartik-v/yii2-widget-datepicker": "dev-master"
+        "kartik-v/yii2-widget-datepicker": "dev-master",
+        "yeesoft/yii2-lightbox": "~0.1.0"
 
     },
     "require-dev": {

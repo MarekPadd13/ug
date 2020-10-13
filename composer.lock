@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38c9e1baa8ba3aa0ff6d592e4c91bee4",
+    "content-hash": "3781d87173240e8f67ef6fb74906f12e",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -99,6 +99,27 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.6"
+            },
+            "type": "bower-asset",
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/lightbox2",
+            "version": "v2.11.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lokesh/lightbox2.git",
+                "reference": "e51998c067f95a7d23599c2d1efa130f6662ec11"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lokesh/lightbox2/zipball/e51998c067f95a7d23599c2d1efa130f6662ec11",
+                "reference": "e51998c067f95a7d23599c2d1efa130f6662ec11"
+            },
+            "require": {
+                "bower-asset/jquery": ">2"
             },
             "type": "bower-asset",
             "license": [
@@ -1133,6 +1154,48 @@
                 "mailer"
             ],
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "yeesoft/yii2-lightbox",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yeesoft/yii2-lightbox.git",
+                "reference": "5edee95567964b5c86d6a3b374ec476e9db20337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yeesoft/yii2-lightbox/zipball/5edee95567964b5c86d6a3b374ec476e9db20337",
+                "reference": "5edee95567964b5c86d6a3b374ec476e9db20337",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/lightbox2": "~2.8",
+                "yiisoft/yii2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "yeesoft\\lightbox\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Taras Makitra",
+                    "email": "makitrataras@gmail.com"
+                }
+            ],
+            "description": "Lightbox widget for Yii2",
+            "keywords": [
+                "lightbox",
+                "module",
+                "yii2"
+            ],
+            "time": "2017-03-01T11:30:59+00:00"
         },
         {
             "name": "yii-dream-team/yii2-upload-behavior",

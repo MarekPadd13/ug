@@ -1726,8 +1726,6 @@ class SiteController extends Controller
 
     public function actionDeletePollResult($hash)
     {
-
-
         $model = SendingDeliveryStatus::find()->andWhere(['hash' => $hash])->one();
         $model->poll_answer_id = null;
 

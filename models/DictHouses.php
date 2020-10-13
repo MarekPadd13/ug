@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "dict_houses".
  *
  * @property int $id
- * @property string $number_house
+ * @property string $name
  * @property string $deadline
  * @property int $moderation
  *
@@ -65,6 +65,14 @@ class DictHouses extends \yii\db\ActiveRecord
             ->where(['moderation'=> self::ADD_MODERATION])
             ->orderBy(['name'=> SORT_ASC])
             ->indexBy('id')->column();
+    }
+
+    public function getImages() {
+        return $this->hasMany(HomeImage::class, ['home_id'=>'id'])->where(['status'=> HomeImage::STATUS_PUBLISHED])->orderBy(['date' => SORT_DESC]);
+    }
+
+    public function getLastImage() {
+        return $this->getImages()->one();
     }
 
     /**
