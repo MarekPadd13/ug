@@ -5,19 +5,26 @@ use yeesoft\lightbox\Lightbox;
 /* @var $this yii\web\View */
 /* @var $model app\models\DictHouses */
 /* @var $image app\models\HomeImage */
-
+?>
+<style>
+    #lightbox {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+</style>
+<?php
 $itemsLight = [];
 foreach ($model->getAnglesImages($angle_id) as $index => $image) {
     $itemsLight[$index]['thumb'] = $image->getThumbFileUrl('image', 'preview');
     $itemsLight[$index]['image'] = $image->getImageFileUrl('image');
     $itemsLight[$index]['group'] = 'image-set'.$image->angle_id;
-    $itemsLight[$index]['title'] = '<h2> Ракурс: ' . $image->angle->name . '</h2> <p class="pull-right">Дата: ' . $image->date . '</p> <p>Источник: ' . $image->link . '</p>';
+    $itemsLight[$index]['title'] = '<h4> Ракурс: ' . $image->angle->name . '<span class="pull-right">Дата: ' . $image->dateView . '</span></h4> <p>Источник: ' . $image->link . '</p>';
 }
 ?>
 <?= Lightbox::widget([
     'options' => [
         'fadeDuration' => '2000',
-        'albumLabel' => "Image %1 of %2",
+        'albumLabel' => "Фото %1 из %2",
     ],
     'linkOptions' => ['class' => 'pull-left'],
     'imageOptions' => ['class' => 'thumbnail'],

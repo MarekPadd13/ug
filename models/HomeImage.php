@@ -79,6 +79,9 @@ class  HomeImage extends \yii\db\ActiveRecord
         return self::statusList()[$this->status];
     }
 
+    public function getDateView() {
+        return date('d.m.Y', strtotime($this->date));
+    }
 
     public function getHome() {
         return $this->hasOne(DictHouses::class, ['id'=> 'home_id']);

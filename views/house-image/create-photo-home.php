@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 $this->title = 'Загрузить фото дома '.$home->name;
 $this->params['breadcrumbs'][] = ['label' => 'Фотографии домов', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' =>"Фотографии домов", 'url' => ['view', 'id'=> $home->id]];
+$this->params['breadcrumbs'][] = ['label' =>'Фотографии дома '.$home->name, 'url' => ['view', 'id'=> $home->id]];
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
