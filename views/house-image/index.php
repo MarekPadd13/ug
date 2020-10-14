@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\StreamSearch */
 /* @var $data yii\data\ActiveDataProvider */
 
-$this->title = 'Фотографии домов';
+$this->title = 'Ход строительства';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stream-index">

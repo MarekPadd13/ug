@@ -63,7 +63,7 @@ class HouseImageController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('success','Успешно добавлен. Ожидайте модерацию' );
+                Yii::$app->session->setFlash('success','Успешно загружено. Ожидайте модерацию' );
                 return $this->redirect(['index']);
             }catch (\RuntimeException $e) {
                 Yii::$app->session->setFlash('danger', $e->getMessage());
@@ -88,7 +88,7 @@ class HouseImageController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
-                Yii::$app->session->setFlash('success','Успешно добавлен. Ожидайте модерацию');
+                Yii::$app->session->setFlash('success','Успешно загружено. Ожидайте модерацию');
                 return $this->redirect(['view', 'id'=> $model->id]);
             }catch (\RuntimeException $e) {
                 Yii::$app->session->setFlash('danger', $e->getMessage());
