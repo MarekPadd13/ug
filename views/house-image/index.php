@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $data,
         'layout' => "{items}\n{pager}",
         'beforeItem' => function($model , $key , $index , $widget) {
-            return  $index%4 == 0 ? '<div class="row">':"";
+            return  $index%3 == 0 ? '<div class="row" style="margin-bottom: 15px">':"";
         },
         'afterItem' => function($model , $key , $index , $widget) use($data) {
-            return  $index%4 == 3  || ($data->getTotalCount() - 1) == $index ? '</div>': "";
+            return  $index%3 == 2  || ($data->getTotalCount() - 1) == $index ? '</div>': "";
         },
         'itemView' => '_item',
     ]) ?>
