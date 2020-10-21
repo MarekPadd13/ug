@@ -15,6 +15,8 @@ $url = Url::to(['view', 'id' => $model->id]);
             <h4>Дом: <?= Html::encode($model->name) ?></h4>
             <p>Количество фотографий: <?= $model->getImages()->count() ?></p>
             <p>Дата последнего снимка: <?= $model->lastImage->dateView ?></p>
+            <p>Степень завершения строительства: <?= $model->maxNumber ?></p>
+            <p>Темп строительства: <?= $model->lastPace ?></p>
             <p><a class="btn btn-primary" href="<?= Html::encode($url) ?>" role="button">Подробнее</a></p>
         </div>
     </div>

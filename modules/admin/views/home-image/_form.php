@@ -27,7 +27,7 @@ use app\models\DictHouses;
         ],
         'pluginEvents' => [
             'change' => 'function(e) { 
-                if(e.currentTarget.value ==0) {
+                if(e.currentTarget.value == 0) {
                    $("#angle_new").show();
                  } 
                  else {

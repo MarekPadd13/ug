@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $deadline
  * @property int $moderation
+ * @property  int $flat_count
  *
  * @property Profiles[] $profiles
  */
@@ -22,9 +23,14 @@ class DictHouses extends \yii\db\ActiveRecord
     const NEED_MODERATION = 0;
     const ADD_MODERATION = 1;
 
-    public function GetModerationItem()
+    public static function moderationItem()
     {
         return [self::NEED_MODERATION => 'Нет', self::ADD_MODERATION => 'Да'];
+    }
+
+    public function getModerationName()
+    {
+        return self::moderationItem()[$this->moderation];
     }
 
     public static function tableName()
@@ -38,9 +44,9 @@ class DictHouses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'deadline', 'moderation'], 'required'],
+            [['name', 'deadline', 'moderation',], 'required'],
             [['deadline'], 'safe'],
-            [['moderation'], 'integer'],
+            [['moderation','flat_count'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
     }
@@ -52,10 +58,11 @@ class DictHouses extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'number_house' => 'Number House',
             'name' => 'Номер дома',
             'deadline' => 'Deadline',
             'moderation' => 'Moderation',
+            'moderationName' => 'Moderation',
+            'flat_count' => 'Flat Count'
         ];
     }
 
@@ -85,6 +92,38 @@ class DictHouses extends \yii\db\ActiveRecord
 
     public function getAnglesImages($angleId) {
         return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->all();
+    }
+
+    public function getDataEndHomeBuild() {
+        return $this->hasMany(EndHomeBuild::class, ['home_id'=>'id']);
+    }
+
+    public function getMaxNumberYear($year)
+    {
+        return  $this->getDataEndHomeBuild()->where(['YEAR(date)' => $year])->max('number');
+    }
+
+    public function getMaxNumber()
+    {
+        return  $this->getDataEndHomeBuild()->max('number').'%' ?? 'нет данных';
+    }
+
+    public function getLastPace()
+    {
+        $array = $this->getDataEndHomeBuild()->select('number')->orderBy(['date'=> SORT_DESC])->column();
+        if (count($array) > 1) {
+            arsort($array);
+            return ($array[0] - $array[1]). "%";
+        }
+
+        return 'нет данных';
+
+    }
+
+
+    public function getMaxNumberYearAndMonth($year, $month)
+    {
+        return  $this->getDataEndHomeBuild()->where(['YEAR(date)' => $year, 'MONTH(date)' => $month])->max('number');
     }
 
     /**

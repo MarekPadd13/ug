@@ -22,6 +22,12 @@ $angle_id= (int)$angle_id;
         <?= Html::a('Загрузить фото ', ['add-photo-home', 'home_id'=>$model->id], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <?php if($model->getDataEndHomeBuild()->count()): ?>
+
+        <?= \app\widgets\ChartWidget::widget(['model'=> $model, 'url' => ['/house-image/view', 'id' => $model->id]]); ?>
+
+    <?php endif; ?>
+
     <?= $this->render('partials/_buttons_angle', [
         'model' => $model,
         'angle_id' => $angle_id

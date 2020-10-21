@@ -143,8 +143,6 @@ $config = [
         'slider' => [
             'class' => 'app\modules\slider\Module',
         ],
-
-
     ],
 
     'as access' => [
