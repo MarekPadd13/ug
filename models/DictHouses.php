@@ -105,7 +105,7 @@ class DictHouses extends \yii\db\ActiveRecord
 
     public function getMaxNumber()
     {
-        return  $this->getDataEndHomeBuild()->max('number').'%' ?? 'нет данных';
+        return  $this->getDataEndHomeBuild()->max('number');
     }
 
     public function getLastPace()
