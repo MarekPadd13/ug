@@ -113,7 +113,7 @@ class DictHouses extends \yii\db\ActiveRecord
         $array = $this->getDataEndHomeBuild()->select('number')->orderBy(['date'=> SORT_DESC])->column();
         if (count($array) > 1) {
             arsort($array);
-            return ($array[0] - $array[1]). "%";
+            return ($array[0] - $array[1]). "% в мес.";
         }
 
         return 'нет данных';

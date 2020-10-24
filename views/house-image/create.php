@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model \app\modules\admin\form\HomeImageForm */
 
 $this->title = 'Загрузить фото';
-$this->params['breadcrumbs'][] = ['label' => 'Фотографии домов', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Список домов', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="stream-create">

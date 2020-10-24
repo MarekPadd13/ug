@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="dict-angle-view">
 
-        <h3>Степень завершения строительства</h3>
+        <h3>Степень готовоности</h3>
 
         <p>
             <?= Html::a('Создать', ['end-home-build/create', 'home_id' => $model->id], ['class' => 'btn btn-primary']) ?>

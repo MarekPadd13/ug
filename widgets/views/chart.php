@@ -5,7 +5,8 @@ use yii\helpers\Html;
 $getYear = (int) Yii::$app->request->get('year') ?? 0;
 $countYears = count($data['years']);?>
 
-    <h3>Графмк хода строительства</h3>
+    <h3>График хода строительства</h3>
+    <p>На основе данных портала "Добродел".</p>
 
 <?php if ($countYears > 1) : ?>
     <?= Html::a('По годам', $url, ['class'=> 'btn btn-danger'])?>
@@ -15,15 +16,15 @@ $countYears = count($data['years']);?>
         $dataLabel =  $getYear ?  $data['months'][$getYear] : $data['years'];
         $dataNumber = $getYear ?  $data['dataMonth'][$getYear] :  $data['dataYear'];
         $dataPaceNumber = $getYear ?  $data['paceMonth'][$getYear] :  $data['paceYear'];
-        $label  =   "Степень завершения строительства (%) ". ($getYear ? $getYear."г." : 'по годам');
-        $labelPace  =   "Темп строительства (%) ". ($getYear ? $getYear."г." : 'по годам');
+        $label  =   "Степень готовности в % ". ($getYear ? $getYear."г." : 'по годам');
+        $labelPace  =   "Темп строительства в % ". ($getYear ? $getYear."г." : 'по годам');
     endforeach;
     else:
         $dataLabel = $data['months'][$data['years'][0]];
         $dataNumber = $data['dataMonth'][$data['years'][0]];
         $dataPaceNumber = $data['paceMonth'][$data['years'][0]];
-        $label  =   "Степень завершения строительства (%) ". $data['years'][0]."г.";
-        $labelPace  =   "Темп строительства (%) ". $data['years'][0]."г.";;
+        $label  =   "Степень готовности в % ". $data['years'][0]." г.";
+        $labelPace  =   "Темп строительства в % ". $data['years'][0]." г.";;
 endif;
 ?>
 

@@ -104,25 +104,29 @@ $problems_array = ArrayHelper::map(RefProblems::find()->all(), 'id', 'name');
 
 <div class="row">
 
-    <div class="col-md-2 mt-30 col-md-offset-1 col-xs-6"
+    <div class="mt-30 col-md-2"
          align="center">
         <?= Html::a(Html::img('@web/img/docs.png') . '<br/>Документы', 'site/documents') ?><br/>
     </div>
 
-    <div class="col-md-2 mt-30 col-xs-6" align="center">
+    <div class="col-md-2 mt-30" align="center">
         <?= Html::a(Html::img('@web/img/carpooling.png') . '<br/>Довезу до ЖК', 'trip') ?>
 
     </div>
-    <div class="col-md-2 mt-30 col-xs-6" align="center">
+    <div class="col-md-2 mt-30" align="center">
         <?= Html::a(Html::img('@web/img/cctv.png') . '<br/>Онлайн-трансляция', 'stream') ?>
 
     </div>
-    <div class="col-md-2 mt-30 col-xs-6" align="center">
+    <div class="col-md-2 mt-30" align="center">
+        <?= Html::a(Html::img('@web/img/crane50.png') . '<br/>Ход строительства', 'house-image/index') ?>
+
+    </div>
+    <div class="col-md-2 mt-30" align="center">
         <?= Html::a(Html::img('@web/img/links.png') . '<br/>Полезные ссылки', 'links') ?>
 
     </div>
 
-    <div class="col-md-2 mt-30 col-xs-6" align="center">
+    <div class="col-md-2 mt-30" align="center">
         <?= Html::a(Html::img('@web/img/vote.png') . '<br/>Текущие голосования и опросы', 'actual-vote') ?>
 
     </div>

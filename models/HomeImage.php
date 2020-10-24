@@ -59,7 +59,7 @@ class  HomeImage extends \yii\db\ActiveRecord
             'id' => 'ID',
             'status'=> "Статус",
             'statusName'=> "Статус",
-            'date'=> 'Дата создания',
+            'date'=> 'Дата съемки',
             'angle_id' => "Ракурс",
             'home_id' => "Номер дома",
             'image' => "Фото",

@@ -9,31 +9,26 @@ use yii\widgets\DetailView;
 /* @var $model app\models\DictHouses */
 /* @var $image app\models\HomeImage */
 
-$this->title = "Фотографии дома  ". $model->name;
-$this->params['breadcrumbs'][] = ['label' =>"Фотографии домов", 'url' => ['index']];
+$this->title = "Ход строительства дома  " . $model->name;
+$this->params['breadcrumbs'][] = ['label' => "Список домов", 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$itemsLight= [];
-$angle_id= Yii::$app->request->get("angle_id");
-$angle_id= (int)$angle_id;
+$itemsLight = [];
+$angle_id = Yii::$app->request->get("angle_id");
+$angle_id = (int)$angle_id;
 ?>
 <div class="stream-view">
     <h1><?= Html::encode($this->title) ?></h1>
+
     <p>
-        <?= Html::a('Загрузить фото ', ['add-photo-home', 'home_id'=>$model->id], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Загрузить фото ', ['add-photo-home', 'home_id' => $model->id], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php if($model->getDataEndHomeBuild()->count()): ?>
-
-        <?= \app\widgets\ChartWidget::widget(['model'=> $model, 'url' => ['/house-image/view', 'id' => $model->id]]); ?>
-
-    <?php endif; ?>
 
     <?= $this->render('partials/_buttons_angle', [
         'model' => $model,
         'angle_id' => $angle_id
     ]) ?>
 
-    <?php if($angle_id) :?>
+    <?php if ($angle_id) : ?>
         <?= $this->render('partials/_angle', [
             'model' => $model,
             'angle_id' => $angle_id
@@ -43,6 +38,19 @@ $angle_id= (int)$angle_id;
             'model' => $model,
         ]) ?>
     <?php endif; ?>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php if ($model->getDataEndHomeBuild()->count()): ?>
+
+                    <?= \app\widgets\ChartWidget::widget(['model' => $model, 'url' => ['/house-image/view', 'id' => $model->id]]); ?>
+
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
 
 
 </div>
