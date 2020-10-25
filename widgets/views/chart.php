@@ -1,15 +1,17 @@
 <?php
-use phpnt\chartJS\ChartJs;
+
+use dosamigos\chartjs\ChartJs;
 use yii\helpers\Html;
 
-$getYear = (int) Yii::$app->request->get('year') ?? 0;
-$countYears = count($data['years']);?>
+$var = Yii::$app->request->get('year');
+$getYear = $var == "year"  ? $var : $var ? (int) $var : (int) date("Y");
+$countYears = count($data['years']); ?>
 
     <h3>График хода строительства</h3>
     <p>На основе данных портала "Добродел".</p>
 
 <?php if ($countYears > 1) : ?>
-    <?= Html::a('По годам', $url, ['class'=> 'btn btn-danger'])?>
+    <?= Html::a('По годам', $url + ['year'=>'year'], ['class'=> 'btn btn-danger'])?>
     <?php foreach ($data['years'] as $year): ?>
     <?= Html::a($year, $url + ['year'=>$year], ['class'=> 'btn btn-primary'])?>
     <?php
@@ -84,9 +86,41 @@ $dataWeatherOne = [
 
 // вывод графиков
 echo ChartJs::widget([
-    'type'  => ChartJs::TYPE_LINE,
+    'type'  => 'line',
     'data'  => $dataWeatherOne,
-    'options'   => []
+    'plugins' =>
+        new \yii\web\JsExpression("
+        [{
+            afterDatasetsDraw: function(chart, easing) {
+                var ctx = chart.ctx;
+                chart.data.datasets.forEach(function (dataset, i) {
+                    var meta = chart.getDatasetMeta(i);
+                    if (!meta.hidden) {
+                        meta.data.forEach(function(element, index) {
+                            // Draw the text in black, with the specified font
+                            ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                            var fontSize = 16;
+                            var fontStyle = 'normal';
+                            var fontFamily = 'Helvetica';
+                            ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                            // Just naively convert to string for now
+                            var dataString = dataset.data[index].toString()+'%';
+
+                            // Make sure alignment settings are correct
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+
+                            var padding = 5;
+                            var position = element.tooltipPosition();
+                            ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                        });
+                    }
+                });
+            }
+        }]"),
+
 ]);
 
 

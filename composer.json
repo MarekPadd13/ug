@@ -32,7 +32,8 @@
         "kartik-v/yii2-widget-fileinput": "dev-master",
         "kartik-v/yii2-widget-datepicker": "dev-master",
         "yeesoft/yii2-lightbox": "~0.1.0",
-        "phpnt/yii2-chartjs": "^0.0.2"
+        "phpnt/yii2-chartjs": "^0.0.2",
+        "2amigos/yii2-chartjs-widget": "~2.0"
 
     },
     "require-dev": {
