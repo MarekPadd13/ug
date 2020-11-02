@@ -94,6 +94,11 @@ class DictHouses extends \yii\db\ActiveRecord
         return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->all();
     }
 
+
+    public function getAnglesImage($angleId) {
+        return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->one();
+    }
+
     public function getDataEndHomeBuild() {
         return $this->hasMany(EndHomeBuild::class, ['home_id'=>'id']);
     }
