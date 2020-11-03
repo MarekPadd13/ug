@@ -84,10 +84,8 @@ $problems_array = ArrayHelper::map(RefProblems::find()->all(), 'id', 'name');
 
 
 <div class="row">
+    <h3 align="center" class="pt-100 color-white">Cайт инициативной группы ЖК "Видный город"</h3>
 
-    <?php if (!Yii::$app->user->id) { ?>
-        <h3 align="center" class="pt-100 color-white">Cайт инициативной группы ЖК "Видный город"</h3>
-    <?php } ?>
 </div>
 
 <?php if (Yii::$app->user->isGuest) { ?>
@@ -104,7 +102,7 @@ $problems_array = ArrayHelper::map(RefProblems::find()->all(), 'id', 'name');
 
 <div class="row">
 
-    <div class="mt-30 col-md-2"
+    <div class="mt-30 col-md-2 col-md-offset-1"
          align="center">
         <?= Html::a(Html::img('@web/img/docs.png') . '<br/>Документы', 'site/documents') ?><br/>
     </div>
@@ -113,10 +111,8 @@ $problems_array = ArrayHelper::map(RefProblems::find()->all(), 'id', 'name');
         <?= Html::a(Html::img('@web/img/carpooling.png') . '<br/>Довезу до ЖК', 'trip') ?>
 
     </div>
-    <div class="col-md-2 mt-30" align="center">
-        <?= Html::a(Html::img('@web/img/cctv.png') . '<br/>Онлайн-трансляция', 'stream') ?>
+        <?//Html::a(Html::img('@web/img/cctv.png') . '<br/>Онлайн-трансляция', 'stream') ?>
 
-    </div>
     <div class="col-md-2 mt-30" align="center">
         <?= Html::a(Html::img('@web/img/crane50.png') . '<br/>Ход строительства', 'house-image/index') ?>
 
