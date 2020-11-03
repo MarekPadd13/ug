@@ -33,7 +33,7 @@ class CurrencyBehavior extends  Behavior
     public function afterFind($event)
     {
         foreach ($this->attributes as $attribute) {
-           $this->owner->$attribute = Yii::$app->formatter->asCurrency($this->owner->$attribute/100, "RU");
+           $this->owner->$attribute = Yii::$app->formatter->asCurrency($this->owner->$attribute/100, "RUB");
         }
 
 

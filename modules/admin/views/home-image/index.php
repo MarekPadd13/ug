@@ -46,6 +46,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'statusName'
             ],
 
+            [
+                'attribute' => 'date_visible',
+                'filter' => HomeImage::dateVisibleList(),
+                'value' => 'dateVisibleName'
+            ],
+
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

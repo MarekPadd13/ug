@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'angle.name',
             'home.name',
             'link',
+            'dateVisibleName',
             'date:date',
             'created_at:datetime',
             'updated_at:datetime',

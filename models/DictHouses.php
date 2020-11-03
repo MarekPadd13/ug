@@ -88,7 +88,7 @@ class DictHouses extends \yii\db\ActiveRecord
     }
 
     public function getLastImage() {
-        return $this->getImagesDateLast()->one();
+        return $this->getImagesDateLast()->andWhere(['date_visible'=> true ])->one();
     }
 
     public function getAnglesImages($angleId) {
@@ -97,7 +97,7 @@ class DictHouses extends \yii\db\ActiveRecord
 
 
     public function getAnglesImage($angleId) {
-        return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->one();
+        return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId, 'date_visible'=> true])->one();
     }
 
     public function getDataEndHomeBuild() {

@@ -62,6 +62,8 @@ use app\models\DictHouses;
                 'format' => 'yyyy-mm-dd'
             ]]); ?>
 
+    <?= $form->field($model, 'date_visible')->checkbox() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
