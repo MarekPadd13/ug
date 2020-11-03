@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
  * @property int $home_id
  * @property int $created_at
  * @property int $updated_at
+ * @property int $date_visible
  * @property string $date
  * @property string $image
  * @property string $link
@@ -47,6 +48,7 @@ class  HomeImage extends \yii\db\ActiveRecord
         $this->link = $form->link;
         $this->home_id = $form->home_id;
         $this->date = $form->date;
+        $this->date_visible = $form->date_visible;
 
     }
 
@@ -63,6 +65,8 @@ class  HomeImage extends \yii\db\ActiveRecord
             'angle_id' => "Ракурс",
             'home_id' => "Номер дома",
             'image' => "Фото",
+            'date_visible' => "Показывать дату?",
+            'dateVisibleName' => "Показывать дату?",
             'link' => 'Ссылка на источник',
             'name' => "Новое название ракурса",
         ];
@@ -73,10 +77,22 @@ class  HomeImage extends \yii\db\ActiveRecord
             self::STATUS_DEFAULT => "Не опубликован",
             self::STATUS_PUBLISHED => "Опубликован",
         ];
+
     }
+
+    public static  function dateVisibleList() {
+            return [
+                "Нет",
+                "Да",
+            ];
+        }
 
     public function getStatusName () {
         return self::statusList()[$this->status];
+    }
+
+    public function getDateVisibleName () {
+        return self::dateVisibleList()[$this->date_visible];
     }
 
     public function getDateView() {

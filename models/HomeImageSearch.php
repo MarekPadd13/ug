@@ -18,7 +18,7 @@ class HomeImageSearch extends HomeImage
     public function rules()
     {
         return [
-            [['id', 'angle_id','home_id','status'], 'integer'],
+            [['id', 'angle_id','home_id','date_visible','status'], 'integer'],
             [['link','date'], 'safe'],
         ];
     }
@@ -63,6 +63,7 @@ class HomeImageSearch extends HomeImage
             'angle_id' => $this->angle_id,
             'home_id' => $this->home_id,
             'status' => $this->status,
+            'date_visible' =>$this->date_visible
         ]);
 
         $query->andFilterWhere(['like', 'link', $this->link]);

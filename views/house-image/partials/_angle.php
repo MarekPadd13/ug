@@ -18,7 +18,7 @@ foreach ($model->getAnglesImages($angle_id) as $index => $image) {
     $itemsLight[$index]['thumb'] = $image->getThumbFileUrl('image', 'preview');
     $itemsLight[$index]['image'] = $image->getImageFileUrl('image');
     $itemsLight[$index]['group'] = 'image-set'.$image->angle_id;
-    $itemsLight[$index]['title'] = '<h4> Ракурс: ' . $image->angle->name . '<span class="pull-right">Дата: ' . $image->dateView . '</span></h4> <p>Источник: ' . $image->link . '</p>';
+    $itemsLight[$index]['title'] = '<h4>'. ($image->date_visible ? 'Ракурс: ': '') . $image->angle->name . ($image->date_visible ? '<span class="pull-right">Дата: ' . $image->dateView . '</span>': '').'</h4> <p>Источник: ' . $image->link . '</p>';
 }
 ?>
 <?= Lightbox::widget([

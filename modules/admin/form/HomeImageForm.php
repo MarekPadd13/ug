@@ -12,6 +12,7 @@ use yii\web\UploadedFile;
  * @property int $id
  * @property int $angle_id
  * @property int $home_id
+ * @property int $date_visible
  * @property string $date
  * @property string $image
  * @property string $link
@@ -19,7 +20,7 @@ use yii\web\UploadedFile;
  */
 class HomeImageForm extends Model
 {
-    public $name, $link, $image, $angle_id, $date, $home_id;
+    public $name, $link, $image, $angle_id, $date, $date_visible, $home_id;
 
     const SCENARIO_UPDATE = 1;
     const ANGLE_NEW = 0;
@@ -46,7 +47,7 @@ class HomeImageForm extends Model
             },   'whenClient' => 'function (attribute, value) { return $("#homeimageform-angle_id").val() == 0}'],
             [['link','name'], 'string', 'max' => 255],
             ['name', 'unique', 'targetClass' => DictAngle::class, 'message' => 'Такой ракурс уже есть в списке'],
-            [['home_id', 'angle_id'], 'integer'],
+            [['home_id', 'angle_id', 'date_visible'], 'integer'],
             [['date'], 'date', 'format' => "yyyy-mm-dd"],
             ['image', 'required', 'except' => self::SCENARIO_UPDATE],
             ['image', 'image',
