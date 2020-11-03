@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Json;
 
 /**
  * This is the model class for table "dict_houses".
@@ -115,14 +116,12 @@ class DictHouses extends \yii\db\ActiveRecord
 
     public function getLastPace()
     {
-        $array = $this->getDataEndHomeBuild()->select('number')->orderBy(['date'=> SORT_DESC])->column();
+        $array = $this->getDataEndHomeBuild()->select(['number', 'date'])->orderBy(['date'=> SORT_DESC])->limit(2)->asArray()->all();
         if (count($array) > 1) {
-            arsort($array);
-            return ($array[0] - $array[1]). "% в мес.";
+            $result = $array[0]['number']- $array[1]['number'];
+            return $result."% за период ".(date('d.m', strtotime($array[1]['date'])).'-'.date('d.m', strtotime($array[0]['date'])));
         }
-
-        return 'нет данных';
-
+        return Json::encode($array);
     }
 
 
