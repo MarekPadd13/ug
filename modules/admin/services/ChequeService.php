@@ -53,8 +53,8 @@ class ChequeService
             'totalSum' => $data['totalSum'],
             'date' =>  $data['dateTime'],
             'count'=> count($data['items']),
-            'nds10' =>  $data['nds10'],
-            'nds20' =>  $data['nds18']
+            'nds10' =>  key_exists('nds10', $data) ? $data['nds10'] : 0,
+            'nds20' =>  key_exists('nds18', $data) ? $data['nds18'] : 0,
         ]);
         $model->save();
         return $model->id;
