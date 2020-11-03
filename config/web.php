@@ -149,6 +149,7 @@ $config = [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'photo/*',
+            'cheque/*',
             'site/*',
             'house-image/*',
             'api/*',
