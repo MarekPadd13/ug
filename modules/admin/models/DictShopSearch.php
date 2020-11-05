@@ -16,7 +16,7 @@ class DictShopSearch extends DictShops
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'inn'], 'safe'],
         ];
     }
 
@@ -60,6 +60,7 @@ class DictShopSearch extends DictShops
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'inn', $this->inn]);
 
         return $dataProvider;
     }

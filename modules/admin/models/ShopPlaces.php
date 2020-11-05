@@ -10,7 +10,6 @@ use Yii;
  *
  * @property int $id
  * @property int $shop_id
- * @property string $address
  * @property int $totalSum
  * @property int $nds10
  * @property int $nds20
@@ -44,9 +43,8 @@ class ShopPlaces extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['shop_id', 'address', 'totalSum', 'date', 'count'], 'required'],
+            [['shop_id','totalSum', 'date', 'count'], 'required'],
             [['shop_id', 'totalSum', 'nds10', 'nds20', 'date', 'count'], 'integer'],
-            [['address'], 'string', 'max' => 255],
             [['shop_id'], 'exist', 'skipOnError' => true, 'targetClass' => DictShops::className(), 'targetAttribute' => ['shop_id' => 'id']],
         ];
     }
@@ -59,7 +57,6 @@ class ShopPlaces extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'shop_id' => 'Магазин',
-            'address' => 'Адрес',
             'totalSum' => 'Общая сумма',
             'nds10' => 'НДС 10%',
             'nds20' => 'НДС 20%',
