@@ -29,14 +29,19 @@ class ChequeService
 
     private function createShopAndGetId(array $data) {
 
-        if(!key_exists('user', $data)) {
-            throw  new  \RuntimeException('Не найдено наименование магазина в чеке.');
+        if(!key_exists('userInn', $data)) {
+            throw  new  \RuntimeException('Не найдено ИНН магазина в чеке.');
         }
-        $array = ['name'=> $data['user']];
+        $userInn = $data['userInn'];
+        $array = ['inn'=> $userInn];
+        $nameShop = $this->getNameShop($userInn);
          if($model = DictShops::findOne($array)) {
              return $model->id;
          }else {
-             $model = new DictShops($array);
+             if(!$nameShop) {
+                 throw  new  \RuntimeException('Не удалось получить данные об организации.');
+             }
+             $model = new DictShops($array+['name'=>$nameShop]);
              $model->save();
              return $model->id;
          }
@@ -48,8 +53,8 @@ class ChequeService
             throw  new  \RuntimeException('Такой чек загружен в бд.');
         }
 
-        $model = new ShopPlaces(['shop_id'=> $shop_id,
-            'address' => key_exists('retailAddress', $data)? $data['retailAddress']: $data['retailPlaceAddress'] ,
+        $model = new ShopPlaces([
+            'shop_id'=> $shop_id,
             'totalSum' => $data['totalSum'],
             'date' =>  $data['dateTime'],
             'count'=> count($data['items']),
@@ -97,5 +102,16 @@ class ChequeService
             $model->save();
         }
     }
+
+    private function getNameShop($inn) {
+        $token = "97116692c956496e352e411373e6472c56fd6aa1";
+        $secret = "bd22a07a42deb91a66dfc0529c62ea6ce8b53fdd";
+        $dadata = new \Dadata\DadataClient($token, $secret);
+        $result = $dadata->findById("party", $inn, 1);
+
+        return is_array($result) ? $result[0]['value'] : null;
+    }
+
+
 
 }

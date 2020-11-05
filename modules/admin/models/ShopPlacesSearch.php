@@ -19,7 +19,7 @@ class ShopPlacesSearch extends ShopPlaces
         return [
             [['shop_id', 'id', 'totalSum', 'nds10', 'nds20', 'date', 'count'], 'integer'],
             [['date_from', 'date_to'], 'date', 'format' => 'php:Y-m-d'],
-            [['address', 'date_from', 'date_to'], 'safe'],
+            [[ 'date_from', 'date_to'], 'safe'],
         ];
     }
 
@@ -67,7 +67,7 @@ class ShopPlacesSearch extends ShopPlaces
             'count' => $this->count,
         ]);
 
-        $query->andFilterWhere(['like', 'address', $this->address])
+        $query
             ->andFilterWhere(['>=', 'date', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
             ->andFilterWhere(['<=', 'date', $this->date_to ? strtotime($this->date_to . ' 23:59:59') : null]);
 

@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $name Наименование магазина
+ * @property string $inn
  *
  * @property GoodsAndShops[] $goodsAndShops
  * @property DictGoods[] $goods
@@ -30,8 +31,8 @@ class DictShops extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'inn'], 'required'],
+            [['name', 'inn'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,6 +44,7 @@ class DictShops extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Наименование',
+            'inn' => "ИНН"
         ];
     }
 

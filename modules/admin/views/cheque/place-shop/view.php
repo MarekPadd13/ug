@@ -25,7 +25,6 @@ $this->title = $model->shop->name. " ". $model->dateView;
     'options' => ['class' => 'table', 'style'=>['width'=> '100%']],
         'model' => $model,
         'attributes' => [
-            'address',
             'totalSum',
             'nds10',
             'nds20',
