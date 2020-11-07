@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'options' => ['class' => 'table-responsive'],
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
@@ -39,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'profile.first_name',
             'profile.patronymic',
-            'apart_number',
             [
                 'attribute' => 'profile.phone',
                 'format' => 'raw',
@@ -66,6 +66,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 }
             ],
+             [
+                    'attribute' => 'type',
+                    'value' => 'typeName'
+                ],
+                'entrance',
+                'floor',
+                'apart_number',
+                'sq',
 
             // 'page:ntext',
             // 'date_of_publication',
@@ -76,12 +84,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function ($model) use ($currentProfile) {
                     if ($model->confirm == false && $model->profile) {
                         return Html::a('подтвердить', ['site/ib-confirm', 'userId' => $model->user_id,
+                            'apartNumber'=> $model->apart_number,
                             'houseId' => $model->house_id], ['class' => 'confirm']);
 
                     } else {
                         If ($model->profile) {
                             return '<p color="gray">подтвеждено</p><p>' .
                                 Html::a('отменить', ['site/ib-confirm', 'userId' => $model->user_id,
+                                    'apartNumber'=> $model->apart_number,
                                     'houseId' => $model->house_id, 'cancel' => true]) .
                                 '</p><p><a target="_blank" href="https://api.whatsapp.com/send?' .
                                 'phone=' . str_replace(array('+', ' ', '(', ')', '-'), '', $model->profile->phone) .

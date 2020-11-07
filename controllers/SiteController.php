@@ -800,10 +800,11 @@ class SiteController extends Controller
 
 
     public
-    function actionIbConfirm($userId, $houseId, $cancel = null)
+    function actionIbConfirm($userId, $houseId, $apartNumber, $cancel = null)
     {
-        $profile = UserHouseApart::find()->andWhere(['user_id' => $userId])->andWhere(['house_id' => $houseId])->one();
+        $profile = UserHouseApart::find()->andWhere(['user_id' => $userId])->andWhere(['house_id' => $houseId, 'apart_number'=> $apartNumber])->one();
         $profile_chief = UserHouseApart::find()->andWhere(['user_id' => Yii::$app->user->id])->one();
+        $profile->scenario = UserHouseApart::SCENARIO_CONFIRM;
         if ($profile->house_id == $profile_chief->house_id && $cancel == null) {
             $profile->confirm = 1;
         } else {
