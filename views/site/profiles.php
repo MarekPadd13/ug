@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
 use yii\widgets\MaskedInput;
 use himiklab\yii2\ajaxedgrid\GridView;
 use yii\data\ActiveDataProvider;
@@ -31,18 +32,17 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $form->field($model, 'in_whatapp_chat')->checkbox([\app\models\UserHouseApart::NoConfirm() ? '': 'disabled'=> true]); ?>
 
 <?php
-if(Yii::$app->user->can('adminAccess'))
-{
-    $readOnly = true;
-}else{
-    $readOnly = false;
-
-}
+//if(Yii::$app->user->can('adminAccess'))
+//{
+//    $readOnly = true;
+//}else{
+//    $readOnly = false;
+//
+//}
 
 if (!$model->isNewRecord) {
     GridView::widget(
         [
-            'readOnly' => $readOnly,
             'dataProvider' => new ActiveDataProvider (['query' => $model->getHouseApart()]),
             'columns' => [
                 [
@@ -51,8 +51,14 @@ if (!$model->isNewRecord) {
                         return $houses[$model->house_id];
                     },
                 ],
-
+                [
+                    'attribute' => 'type',
+                    'value' => 'typeName'
+                ],
+                'entrance',
+                'floor',
                 'apart_number',
+                'sq'
             ],
             'actionColumnTemplate' => '{delete}',
             'addButtons' => ['Добавить квартиру'],

@@ -13,11 +13,20 @@ use Yii;
  * @property int $house_id
  * @property int $apart_number
  * @property int $confirm
+ * @property int $type
+ * @property int $floor
+ * @property int $entrance
+ * @property float $sq
  *
  * @property User $user
  */
 class UserHouseApart extends \yii\db\ActiveRecord
 {
+
+    const TYPE_RESIDENTIAL =  1;
+    const TYPE_NO_RESIDENTIAL =  2;
+
+    const SCENARIO_CONFIRM = 1;
     /**
      * {@inheritdoc}
      */
@@ -32,8 +41,13 @@ class UserHouseApart extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'house_id', 'apart_number', 'confirm'], 'required'],
-            [['user_id', 'house_id', 'apart_number', 'confirm'], 'integer'],
+            [['user_id', 'house_id',  'confirm', 'apart_number',], 'required'],
+            [['floor'], 'required', 'when'=> function($model) {
+                         return $model->type == self::TYPE_RESIDENTIAL;
+            }],
+            [['user_id', 'house_id', 'apart_number', 'confirm', 'entrance', 'floor'], 'integer'],
+            [['sq'], 'number'],
+            [['sq', 'type', 'entrance'], 'required', 'except' => self::SCENARIO_CONFIRM],
             [['user_id', 'house_id', 'apart_number'], 'unique', 'targetAttribute' => ['user_id', 'house_id', 'apart_number']],
             [['apart_number'], 'unique', 'targetAttribute' => ['user_id', 'house_id', 'apart_number'], 'message' => 'Вы уже добавили эту квартиру'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
@@ -47,10 +61,25 @@ class UserHouseApart extends \yii\db\ActiveRecord
     {
         return [
             'user_id' => 'User ID',
-            'house_id' => 'номер дома',
-            'apart_number' => 'Номер квартиры',
+            'house_id' => 'Номер дома',
+            'apart_number' => 'Номер помещения',
             'confirm' => 'Подтверждение статуса дольщика',
+            'floor' => "Этаж",
+            'entrance' => "Подъезд/секция",
+            'sq' => " Доля владения в кв.м",
+            'type' => "Тип помещения"
         ];
+    }
+
+    public static function types() {
+        return [
+            self::TYPE_RESIDENTIAL => "Жилое",
+            self::TYPE_NO_RESIDENTIAL => "Нежилое",
+        ];
+    }
+
+    public function getTypeName() {
+        return self::types()[$this->type];
     }
 
     /**
