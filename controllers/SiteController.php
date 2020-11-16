@@ -1689,7 +1689,25 @@ class SiteController extends Controller
             return $this->redirect('profile');
 
         }
+    }
 
+    public
+    function actionUpdateApart($user_id, $house_id, $apart_number)
+    {
+        $model = $this->findApart($user_id, $house_id, $apart_number);
+
+        $houses = DictHouses::find()->select('name')->indexBy('id')->column();
+
+        $model->confirm = 0;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect('profile');
+        }
+
+        return $this->renderAjax('add-apart',
+            [
+                'model' => $model,
+                'houses' => $houses,
+            ]);
     }
 
 

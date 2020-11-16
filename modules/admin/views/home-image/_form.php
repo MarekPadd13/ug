@@ -15,10 +15,12 @@ use app\models\DictHouses;
 
 <div class="form">
     <?php $form = ActiveForm::begin([
+        'id' => 'image-form',
+        'enableClientValidation' => $model->ajax,
     'options' => [
         'enctype' => 'multipart/form-data',
     ]]); ?>
-
+    <?php if(!Yii::$app->request->get('angle_id')): ?>
     <?= $form->field($model, 'angle_id')->widget(Select2::class, [
         'data' => ['0'=>'Ракурс не найден']+DictAngle::allColumn(),
         'options' => ['placeholder' => 'Ракурсы'],
@@ -36,9 +38,12 @@ use app\models\DictHouses;
             }',
         ]
     ]) ?>
+
     <div id="angle_new">
         <?= $form->field($model, 'name')->textInput() ?>
     </div>
+
+    <?php endif; ?>
     <?php if(!Yii::$app->request->get('home_id')): ?>
     <?= $form->field($model, 'home_id')->widget(Select2::class, [
         'data' => DictHouses::allColumn(),
@@ -48,6 +53,7 @@ use app\models\DictHouses;
         ],
     ]) ?>
     <?php endif; ?>
+    <?= $form->field($model, 'description')->textarea() ?>
 
     <?= $form->field($model, 'link')->textInput() ?>
 

@@ -20,8 +20,9 @@ use yii\web\UploadedFile;
  */
 class HomeImageForm extends Model
 {
-    public $name, $link, $image, $angle_id, $date, $date_visible, $home_id;
+    public $name, $link, $image, $angle_id, $date, $date_visible, $home_id, $description;
 
+    public $ajax = false;
     const SCENARIO_UPDATE = 1;
     const ANGLE_NEW = 0;
 
@@ -46,6 +47,7 @@ class HomeImageForm extends Model
                return $model->angle_id == 0;
             },   'whenClient' => 'function (attribute, value) { return $("#homeimageform-angle_id").val() == 0}'],
             [['link','name'], 'string', 'max' => 255],
+            [['description'], 'string'],
             ['name', 'unique', 'targetClass' => DictAngle::class, 'message' => 'Такой ракурс уже есть в списке'],
             [['home_id', 'angle_id', 'date_visible'], 'integer'],
             [['date'], 'date', 'format' => "yyyy-mm-dd"],

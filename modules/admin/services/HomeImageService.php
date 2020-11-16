@@ -14,10 +14,7 @@ class HomeImageService
         $model = HomeImage::create($form);
         $this->save($model);
         return $model;
-
     }
-
-
 
     public function edit(HomeImage $model, HomeImageForm $form)
     {
@@ -31,12 +28,19 @@ class HomeImageService
             return $model;
         } catch (\Exception $e) {
             $transaction->rollback();
+            throw $e;
         }
     }
 
     public function status(HomeImage $model, $status)
     {
         $model->setStatus($status);
+        $this->save($model);
+    }
+
+    public function published(HomeImage $model, $published)
+    {
+        $model->setPublished($published);
         $this->save($model);
     }
 

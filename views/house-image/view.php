@@ -2,6 +2,7 @@
 
 use yeesoft\lightbox\Lightbox;
 use yii\bootstrap\Carousel;
+use yii\bootstrap\Modal;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -54,3 +55,20 @@ $angle_id = (int)$angle_id;
 
 
 </div>
+<?php
+$this->registerJs(<<<JS
+        $("[data-target=\"#modal\"]").click(function(e) {
+e.preventDefault();
+var url = $(this).attr("href");
+var modalTitle = $(this).attr("data-modalTitle");
+var modal = $('#modal');
+modal.find('#header-h4').text(modalTitle);
+modal.find('#modalContent').load(url);
+});
+JS
+);
+?>
+
+<?php Modal::begin([ 'id'=>'modal', 'size'=> Modal::SIZE_LARGE, 'header' => "<h4 id='header-h4'></h4>", 'clientOptions' => ['backdrop' => false]]) ?>
+<div id='modalContent'></div>
+<?php Modal::end() ?>
