@@ -22,7 +22,6 @@ class HomeImageForm extends Model
 {
     public $name, $link, $image, $angle_id, $date, $date_visible, $home_id, $description;
 
-    public $ajax = false;
     const SCENARIO_UPDATE = 1;
     const ANGLE_NEW = 0;
 

@@ -12,11 +12,11 @@ $array = []
     ?>
     <h4>
         <span style="color: <?= $homeImage && $homeImage->published ? "green" : "black"?>"><?=$array[$angle_id] . ($homeImage ? ".  Дата последнего снимка: " . $homeImage->dateView : "") ?></span>
-        <?= Html::a("Загрузить фото", ['add-photo-home-and-angle', 'home_id'=> $model->id, 'angle_id'=> $angle_id, ],
-            ['data-pjax' => 'w0', 'data-toggle' => 'modal', 'data-target' => '#modal', 'data-modalTitle' => "", 'class'=> 'btn btn-info']) ?>
+        <?= $homeImage  ? Html::a("Загрузить фото", ['add-photo-home-and-angle', 'home_id'=> $model->id, 'angle_id'=> $angle_id, ],
+            ['class'=> 'btn btn-link']) : '' ?>
     </h4>
     <?php if($homeImage && $homeImage->published) : ?>
-    <p><?= $homeImage->description ?></p>
+    <p>Есть изменения: <?= $homeImage->description ?></p>
     <?php endif;?>
 
 <?php endif; ?>

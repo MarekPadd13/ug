@@ -116,11 +116,6 @@ class HouseImageController extends Controller
         $modelAngle = $this->findModelAngle($angle_id);
         $modelHome = $this->findModel($home_id);
         $form = new HomeImageForm(null,['home_id'=> $modelHome->id, 'angle_id'=> $modelAngle->id]);
-        $form->ajax = true;
-        if (Yii::$app->request->isAjax && $form->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($form);
-        }
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             try {
                 $this->service->create($form);
@@ -130,9 +125,9 @@ class HouseImageController extends Controller
                 Yii::$app->session->setFlash('danger', $e->getMessage());
             }
         }
-        return $this->renderAjax('create-photo-home-and-angle', [
+        return $this->render('create-photo-home-and-angle', [
             'model' => $form,
-            'homeName' => $modelHome->name,
+            'home' => $modelHome,
             'angleName' => $modelAngle->name,
         ]);
     }

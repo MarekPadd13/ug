@@ -20,7 +20,7 @@ foreach ($model->getAnglesImages($angle_id) as $index => $image) {
     $itemsLight[$index]['group'] = 'image-set'.$image->angle_id;
     $itemsLight[$index]['title'] = '<h4>'. ($image->date_visible ? 'Ракурс: ': '') .
         $image->angle->name . ($image->date_visible ? '<span class="pull-right">Дата: ' . $image->dateView . '</span>': '').'</h4> 
-<p>Источник: ' . $image->link . '</p>'. ($image->published ? '<p>'.$image->description.'</p>': '');
+<p>Источник: ' . $image->link . '</p>'. ($image->published ? '<p>Есть изменения: '.$image->description.'</p>': '');
 }
 ?>
 <?= Lightbox::widget([

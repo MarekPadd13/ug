@@ -16,7 +16,6 @@ use app\models\DictHouses;
 <div class="form">
     <?php $form = ActiveForm::begin([
         'id' => 'image-form',
-        'enableClientValidation' => $model->ajax,
     'options' => [
         'enctype' => 'multipart/form-data',
     ]]); ?>
@@ -53,7 +52,7 @@ use app\models\DictHouses;
         ],
     ]) ?>
     <?php endif; ?>
-    <?= $form->field($model, 'description')->textarea() ?>
+    <?= $form->field($model, 'description')->label('Краткое описание изменений (если их нет, то поле можно оставить пустым)')->textarea() ?>
 
     <?= $form->field($model, 'link')->textInput() ?>
 
