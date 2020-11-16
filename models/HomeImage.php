@@ -98,7 +98,7 @@ class  HomeImage extends \yii\db\ActiveRecord
     }
 
     public function getPublishedName () {
-        return self::statusList()[$this->status];
+        return self::statusList()[$this->published];
     }
 
     public function getDateVisibleName () {
