@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $model->status ? Html::a('Снять', ['status', 'id' => $model->id, 'status'=> $model::STATUS_DEFAULT],
          ['class' => 'btn btn-warning', 'data-method'=>'post']) :
             Html::a('Опубликовать', ['status', 'id' => $model->id, 'status'=> $model::STATUS_PUBLISHED], ['class' => 'btn btn-warning', 'data-method'=>'post']) ?>
+        <?= $model->published ? Html::a('Снять c публикации текста', ['published', 'id' => $model->id, 'published'=> $model::STATUS_DEFAULT],
+            ['class' => 'btn btn-warning', 'data-method'=>'post']) :
+            Html::a('Опубликовать текст', ['published', 'id' => $model->id, 'published'=> $model::STATUS_PUBLISHED], ['class' => 'btn btn-warning', 'data-method'=>'post']) ?>
+
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -34,6 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'statusName',
+            'publishedName',
             'angle.name',
             'home.name',
             'link',
@@ -41,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date:date',
             'created_at:datetime',
             'updated_at:datetime',
+            'description:text'
         ],
     ]) ?>
 

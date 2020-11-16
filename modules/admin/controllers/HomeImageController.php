@@ -30,6 +30,7 @@ class HomeImageController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                     'status' => ['POST'],
+                    'published' => ['POST'],
                 ],
             ],
         ];
@@ -151,10 +152,33 @@ class HomeImageController extends Controller
         try {
             $this->service->status($model, $status);
         }catch (\RuntimeException $exception) {
-            Yii::$app->session->setFlash('danger', $e->getMessage());
+            Yii::$app->session->setFlash('danger', $exception->getMessage());
         }
           return $this->redirect(Yii::$app->request->referrer);
     }
+
+    /**
+     * Update Published an existing HomeImage model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @param integer $published
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+
+    public function actionPublished($id, $published)
+    {
+        $model = $this->findModel($id);
+        try {
+            $this->service->published($model, $published);
+        }catch (\RuntimeException $exception) {
+            Yii::$app->session->setFlash('danger', $exception->getMessage());
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
 
 
     /**

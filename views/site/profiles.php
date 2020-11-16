@@ -60,8 +60,9 @@ if (!$model->isNewRecord) {
                 'apart_number',
                 'sq'
             ],
-            'actionColumnTemplate' => '{delete}',
+            'actionColumnTemplate' => '{update} {delete}',
             'addButtons' => ['Добавить квартиру'],
+            'updateRoute' => ['site/update-apart'],
             'createRoute' => ['site/add-apart'],
             'deleteRoute' => ['delete-apart'],
         ]

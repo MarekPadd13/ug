@@ -2,14 +2,17 @@
 
 namespace app\controllers;
 
+use app\models\DictAngle;
 use app\models\DictHouses;
 use app\models\HomeImage;
 use app\modules\admin\form\HomeImageForm;
 use app\modules\admin\services\HomeImageService;
 use Yii;
+use yii\bootstrap\ActiveForm;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 class HouseImageController extends Controller
 {
@@ -101,6 +104,39 @@ class HouseImageController extends Controller
         ]);
     }
 
+
+    /**
+     * @param integer $home_id
+     * @param integer $angle_id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionAddPhotoHomeAndAngle($home_id, $angle_id)
+    {
+        $modelAngle = $this->findModelAngle($angle_id);
+        $modelHome = $this->findModel($home_id);
+        $form = new HomeImageForm(null,['home_id'=> $modelHome->id, 'angle_id'=> $modelAngle->id]);
+        $form->ajax = true;
+        if (Yii::$app->request->isAjax && $form->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($form);
+        }
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            try {
+                $this->service->create($form);
+                Yii::$app->session->setFlash('success','Успешно загружено. Ожидайте модерацию');
+                return $this->redirect(['view', 'id'=> $modelHome->id]);
+            }catch (\RuntimeException $e) {
+                Yii::$app->session->setFlash('danger', $e->getMessage());
+            }
+        }
+        return $this->renderAjax('create-photo-home-and-angle', [
+            'model' => $form,
+            'homeName' => $modelHome->name,
+            'angleName' => $modelAngle->name,
+        ]);
+    }
+
     /**
      * Finds the Stream model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -111,6 +147,22 @@ class HouseImageController extends Controller
     protected function findModel($id)
     {
         if (($model = DictHouses::findOne(['id'=> $id, 'moderation'=> DictHouses::ADD_MODERATION ])) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Finds the Stream model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return DictAngle
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelAngle($id)
+    {
+        if (($model = DictAngle::findOne($id)) !== null) {
             return $model;
         }
 

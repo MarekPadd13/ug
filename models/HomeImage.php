@@ -17,6 +17,8 @@ use yii\web\UploadedFile;
  * @property int $created_at
  * @property int $updated_at
  * @property int $date_visible
+ * @property int $published
+ * @property string $description
  * @property string $date
  * @property string $image
  * @property string $link
@@ -49,6 +51,7 @@ class  HomeImage extends \yii\db\ActiveRecord
         $this->home_id = $form->home_id;
         $this->date = $form->date;
         $this->date_visible = $form->date_visible;
+        $this->description = $form->description;
 
     }
 
@@ -69,6 +72,9 @@ class  HomeImage extends \yii\db\ActiveRecord
             'dateVisibleName' => "Показывать дату?",
             'link' => 'Ссылка на источник',
             'name' => "Новое название ракурса",
+            'description'=> "Краткое описание, что изменилось.",
+            'published'=> "Опубликовать текст?",
+            'publishedName'=> "Опубликовать текст?",
         ];
     }
 
@@ -88,6 +94,10 @@ class  HomeImage extends \yii\db\ActiveRecord
         }
 
     public function getStatusName () {
+        return self::statusList()[$this->status];
+    }
+
+    public function getPublishedName () {
         return self::statusList()[$this->status];
     }
 
@@ -133,6 +143,11 @@ class  HomeImage extends \yii\db\ActiveRecord
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    public function setPublished($published)
+    {
+        $this->published = $published;
     }
 
 }
