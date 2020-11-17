@@ -91,6 +91,10 @@ class DictHouses extends \yii\db\ActiveRecord
         return $this->getImagesDateLast()->andWhere(['date_visible'=> true ])->one();
     }
 
+    public function getLastPublishedDate($date) {
+        return $this->getImagesDateLast()->andWhere(['published'=> true, 'date_visible'=> true, 'date'=>$date])->exists();
+    }
+
     public function getAnglesImages($angleId) {
         return $this->getImagesDateLast()->andWhere(['angle_id'=>$angleId])->all();
     }

@@ -10,7 +10,7 @@ $url = Url::to(['view', 'id' => $model->id]);
 
 ?>
 <div class="col-sm-6 col-md-4" >
-    <div class="thumbnail" style="border:  <?= $model->lastImage->published ? "2px solid green" : "1px solid #0A8ED0"?>">
+    <div class="thumbnail" style="border:  <?= $model->getLastPublishedDate($model->lastImage->date) ? "2px solid green" : "1px solid #0A8ED0"?>">
         <div class="caption">
             <h4>Дом: <?= Html::encode($model->name) ?></h4>
             <p>Количество фотографий: <?= $model->getImages()->count() ?></p>
